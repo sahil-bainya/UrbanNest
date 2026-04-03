@@ -1,7 +1,20 @@
 const Listing = require("../models/listing");
 const getCoordinates = require("../utils/geocoding.js");
 
+//search route
+module.exports.search = (req, res) => {
+  let { destination } = req.body;
+  res.redirect(`/listings?destination=${destination}`);
+};
+
 module.exports.index = async (req, res) => {
+  let { destination } = req.query;
+  if (destination) {
+    const allListings = await Listing.find({
+      country: destination.toLowerCase(),
+    });
+    return res.render("listings/index.ejs", { allListings });
+  }
   const allListings = await Listing.find({});
   res.render("listings/index.ejs", { allListings });
 };

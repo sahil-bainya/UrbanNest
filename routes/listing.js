@@ -8,6 +8,14 @@ const multer = require("multer");
 const { storage } = require("../cloudConfig.js");
 const upload = multer({ storage });
 
+// search rounte
+// router.post("/search", (req, res) => {
+//   let {destination} = req.body; 
+//   // res.send(`${destination}`); 
+//   res.redirect(`/?destination=${destination.toLowerCase()}`);
+// });
+
+router.post("/search",listingController.search);
 router
   .route("/")
   .get(wrapAsync(listingController.index))

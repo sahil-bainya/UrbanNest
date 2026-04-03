@@ -14,7 +14,10 @@ const listingSchema = new Schema({
   },
   price: Number,
   location: String,
-  country: String,
+  country: {
+    type: String,
+    lowercase: true,
+  },
   reviews: [
     {
       type: Schema.Types.ObjectId,

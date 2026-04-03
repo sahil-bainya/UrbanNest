@@ -57,10 +57,9 @@ passport.deserializeUser(User.deserializeUser());
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
-
 app.use(methodOverride("_method"));
 
-const PORT = process.env.PORT || 3000 ;
+const PORT = process.env.PORT || 3000;
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -78,9 +77,9 @@ async function main() {
   await mongoose.connect(DbURL);
 }
 
-// app.get("/", (req, res) => {
-//   res.send("this is root");
-// });
+app.get("/", (req, res) => {
+  res.redirect("/listings");
+});
 
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
